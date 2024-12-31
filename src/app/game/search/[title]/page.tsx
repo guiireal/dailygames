@@ -1,9 +1,10 @@
 import { Container } from "@/components/Container";
+import { GameCard } from "@/components/GameCard";
 import { Input } from "@/components/Input";
 import { Game } from "@/types";
 
 export type GameSearchTitleProps = {
-  params: { title: string };
+  params: Promise<{ title: string }>;
 };
 
 async function getData(title: string) {
@@ -19,8 +20,9 @@ async function getData(title: string) {
 }
 
 export default async function GameSearchTitle({
-  params: { title },
+  params,
 }: GameSearchTitleProps) {
+  const { title } = await params;
   const games: Game[] = await getData(title);
 
   return (
@@ -30,6 +32,11 @@ export default async function GameSearchTitle({
         <h1 className="font-bold text-xl mt-8 mb-5">
           Veja o que encontramos na nossa base:
         </h1>
+        {!games && <p>Esse jogo não foi encontrado!...</p>}
+        <section className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {games?.length &&
+            games.map((game) => <GameCard key={game.id} data={game} />)}
+        </section>
       </Container>
     </main>
   );
