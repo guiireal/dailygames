@@ -1,6 +1,8 @@
 import { Container } from "@/components/Container";
 import { GameCard } from "@/components/GameCard";
-import { Game as GameType } from "@/types";
+import type { Game as GameType } from "@/types";
+import { splitDescription } from "@/utils";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { Label } from "./components/Label";
@@ -8,6 +10,45 @@ import { Label } from "./components/Label";
 type GameProps = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({
+  params,
+}: GameProps): Promise<Metadata> {
+  try {
+    const { id } = await params;
+
+    const response = await fetch(
+      `${process.env.NEXT_API_URL}/next-api/?api=game&id=${id}`,
+      { next: { revalidate: 60 } }
+    );
+
+    const data: GameType = await response.json();
+
+    return {
+      title: `DalyGames - ${data.title}`,
+      description: splitDescription(data.description),
+      openGraph: {
+        title: `DalyGames - ${data.title}`,
+        description: splitDescription(data.description),
+        images: [data.image_url],
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          noimageindex: true,
+        },
+      },
+    };
+  } catch (error) {
+    return {
+      title: "DalyGames - Descubra jogos incríveis para se divertir",
+    };
+  }
+}
 
 async function getData(id: string) {
   try {

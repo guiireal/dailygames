@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dalygames",
+  title: "DalyGames - Descubra jogos incríveis para se divertir",
   description: "Jogos diários",
   keywords: ["games", "jogos", "steam"],
   openGraph: {
