@@ -8,6 +8,20 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Dalygames",
   description: "Jogos diários",
+  keywords: ["games", "jogos", "steam"],
+  openGraph: {
+    images: [`${process.env.PROJECT_URL}/preview.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function RootLayout({
