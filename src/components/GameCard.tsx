@@ -17,7 +17,7 @@ export function GameCard({ data }: GameCardProps) {
             src={data.image_url}
             alt={data.title}
             fill
-            quality={100}
+            quality="100"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 44vw"
           />
         </div>

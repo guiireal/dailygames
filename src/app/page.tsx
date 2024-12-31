@@ -61,7 +61,7 @@ export default async function Home() {
                 src={dalyGame.image_url}
                 alt={dalyGame.title}
                 priority
-                quality={100}
+                quality="100"
                 fill
                 className="max-h-96 object-cover rounded-lg opacity-50 hover:opacity-100 transition-all duration-300"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 44vw"
