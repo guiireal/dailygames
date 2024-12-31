@@ -1,8 +1,14 @@
 import { Container } from "@/components/Container";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { FaShareAlt } from "react-icons/fa";
 import userImage from "../../../public/user.png";
 import { FavoriteCard } from "./components/FavoriteCard";
+
+export const metadata: Metadata = {
+  title: "DalyGames - Meu perfil",
+  description: "Perfil Dev Gui",
+};
 
 export default function Profile() {
   return (
