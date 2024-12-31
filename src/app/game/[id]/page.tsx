@@ -13,7 +13,7 @@ async function getData(id: string) {
   try {
     const response = await fetch(
       `${process.env.NEXT_API_URL}/next-api/?api=game&id=${id}`,
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
 
     return response.json();
